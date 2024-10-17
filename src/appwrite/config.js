@@ -65,11 +65,11 @@ class postOperation{
             return false
         }
     }
-    async getDocuments(collectionId,queries){
+    async getDocuments(queries){
         try {
             return await this.database.listDocuments(
                 conf.appwriteDatabaseId,
-                collectionId,
+                conf.collectionId,
                 queries
             )
         } catch (error) {
