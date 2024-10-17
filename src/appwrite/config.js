@@ -69,7 +69,7 @@ class postOperation{
         try {
             return await this.database.listDocuments(
                 conf.appwriteDatabaseId,
-                conf.collectionId,
+                conf.appwriteCollectionId,
                 queries
             )
         } catch (error) {

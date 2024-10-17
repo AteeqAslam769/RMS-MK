@@ -9,7 +9,7 @@ const Expenses = () => {
 
   useEffect(() => {
     blogOperations
-      .getDocuments(collections.Expenses)
+      .getDocuments()
       .then((expenses) => {
         if (expenses) setData(expenses.documents);
       })
