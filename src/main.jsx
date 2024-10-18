@@ -15,21 +15,17 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/login" element={<Login />} />
-
-      {/* Main route */}
-      <Route element={<ProtectedRoute />}>
-        {/* Protected Route */}
-        <Route path='/' element={<App />}>
-          {/* Expenses Route */}
-          <Route path="/rent" element={<Test />} />
-          <Route path="/borrow" element={<Test />} />
-          <Route path="/well-part" element={<Test />} />
-          <Route path="/expenses" element={<Expenses />} />
-          <Route path="/loan" element={<Test />} />
-          <Route path="/reports" element={<Test />} />
-          <Route path="/manage-user" element={<Test />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path='/' element={<App />}>
+            <Route path="/rent" element={<Test />} />
+            <Route path="/borrow" element={<Test />} />
+            <Route path="/well-part" element={<Test />} />
+            <Route path="/expenses" element={<Expenses />} />
+            <Route path="/loan" element={<Test />} />
+            <Route path="/reports" element={<Test />} />
+            <Route path="/manage-user" element={<Test />} />
+          </Route>
         </Route>
-      </Route>
     </>
   )
 );

@@ -20,8 +20,7 @@ const Admin_Dashboard = () => {
 
   const handleLogout = async () => {
     try {
-      await appwriteAuthService.logout; // Call your logout function
-      navigate('/login'); // Redirect to login page after logout
+      appwriteAuthService.logout().then(()=>navigate('/login')) 
     } catch (error) {
       console.error('Logout failed:', error);
     }

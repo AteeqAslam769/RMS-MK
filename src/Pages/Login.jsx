@@ -1,5 +1,5 @@
 import React from 'react'
-import LoginC  from '../Components/LoginC'
+import LoginC  from '../Components/LoginComponent'
 
 function Login() {
     return (

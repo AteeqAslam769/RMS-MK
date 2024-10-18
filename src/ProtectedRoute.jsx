@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Login from './Pages/Login'
 import { appwriteAuthService } from './appwrite/auth'
 
 function ProtectedRoute() {
     
-    const isLoggedIn = appwriteAuthService.checkCurrentUserStatus()
+    const [isLoggedIn,setIsLoggedIn] = useState(false) 
+    appwriteAuthService.checkCurrentUserStatus().then((data)=>setIsLoggedIn(data))
     return(
         isLoggedIn? <Outlet/> : <Login/>
     ) 
