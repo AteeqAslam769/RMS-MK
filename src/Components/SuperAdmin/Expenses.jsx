@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { blogOperations } from '../../appwrite/config';
-import { collections } from '../../config/collection';
+import { documentOperations } from '../../appwrite/config';
 import Loader from '../Loader/Loader';
+import conf from '../../config/conf';
 
 const Expenses = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    blogOperations
-      .getDocuments()
+    documentOperations.getDocuments(conf.appwriteExpensesCollectionId)
       .then((expenses) => {
         if (expenses) setData(expenses.documents);
       })
@@ -24,7 +23,10 @@ const Expenses = () => {
       Rejected: 3,
     };
     return statusOrder[a.status] - statusOrder[b.status];
-  });
+  }
+);
+
+  
 
   if (loading) {
     return <Loader />;
@@ -36,8 +38,8 @@ const Expenses = () => {
             <p className="text-xl text-gray-500">No expense requests yet.</p>
           </div>
         ) : (
-          sortedData.map((expense, index) => (
-            <div key={index} className="bg-white shadow-lg rounded-lg p-6 w-80 sm:w-60 md:w-80 lg:w-96 h-auto flex flex-col">
+          sortedData.map((expense) => (
+            <div key={expense.$id} className="bg-white shadow-lg rounded-lg p-6 w-80 sm:w-60 md:w-80 lg:w-96 h-auto flex flex-col">
               {/* Requester Info */}
               <div className="mb-6">
                 <h2 className="text-xl text-center font-bold">{expense.requesterName}</h2>

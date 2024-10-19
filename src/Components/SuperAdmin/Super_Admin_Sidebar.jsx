@@ -3,10 +3,13 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { appwriteAuthService } from '../../appwrite/auth';
+import { useDispatch } from 'react-redux';
+import {logout} from '../../features/authSlice'
 
 const Admin_Dashboard = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate(); // useNavigate hook to redirect after logout
+  const dispatch = useDispatch();
 
   const navItems = [
     { name: 'Rent', slug: '/rent' },
@@ -20,7 +23,9 @@ const Admin_Dashboard = () => {
 
   const handleLogout = async () => {
     try {
-      appwriteAuthService.logout().then(()=>navigate('/login')) 
+      appwriteAuthService.logout().then(()=>
+        {dispatch(logout());
+        navigate('/login')}) 
     } catch (error) {
       console.error('Logout failed:', error);
     }
@@ -28,7 +33,7 @@ const Admin_Dashboard = () => {
 
   return (
     <aside
-      className={`bg-gray-800 text-white h-screen w-64 fixed top-16 left-0 transition-all duration-300 z-40
+      className={`bg-slate-600 text-white h-screen w-64 fixed top-16 left-0 transition-all duration-300 z-40
       ${isMobileMenuOpen ? 'translate-x-0 bg-opacity-100' : '-translate-x-52 bg-opacity-0'} 
       md:bg-opacity-100 md:translate-x-0 md:top-16 pt-8 md:pt-6`}
     >
@@ -69,7 +74,7 @@ const Admin_Dashboard = () => {
         <div className="mt-6 px-6">
           <button
             onClick={handleLogout}
-            className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg text-center"
+            className="w-full bg-cyan-600 hover:bg-cyan-700 text-white py-2 rounded-lg text-center"
           >
             Logout
           </button>

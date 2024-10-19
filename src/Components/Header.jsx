@@ -20,10 +20,10 @@ const Header = ({ userStatus }) => {
   const time = currentTime.toLocaleTimeString();
 
   return (
-    <header className="text-black bg-white p-4 sticky top-0 z-50 shadow-md w-full">
+    <header className="text-white bg-slate-800 p-4 sticky top-0 z-50 shadow-md w-full">
       <div className="flex justify-between items-center">
         {/* Left: Company Name */}
-        <div className="text-2xl font-bold text-blue-700">RMS&nbsp;MK</div> {/* Non-breaking space added */}
+        <div className="text-2xl font-bold text-cyan-300">RMS&nbsp;MK</div> {/* Non-breaking space added */}
 
         {/* Right: Day, Date, Time, and Status */}
         <div className="hidden md:flex flex-col items-end text-right">

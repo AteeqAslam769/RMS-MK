@@ -1,7 +1,7 @@
 import {Client,Databases,Query,Storage,ID} from 'appwrite'
 import conf from '../config/conf'
 
-class postOperation{
+class documentOperation{
     client
     account
     database
@@ -34,23 +34,49 @@ class postOperation{
         }
     }
 
-    async editBlog(slug,{title,content,featuredImage,status}){
-        try {
-            return await this.database.updateDocument(
-                conf.databaseId,
-                conf.collectionId,
-                slug,
-                {
-                    title,
-                    content,
-                    featuredImage,
-                    status
-                }
-            )
-        } catch (error) {
-            console.error(error)
-        }
-    }
+    async updateRentalInfo(collectionId, slug, {
+        renterName,
+        renterContact,
+        rentStartDate,
+        rentEndDate,
+        monthlyRent,
+        paymentDueDate,
+        securityPaid,
+        totalAmountPaid,
+        paymentStatus,
+        EntryOperator,
+        wallet
+}) {
+  try {
+    // Call to Appwrite API to update the document
+    const updatedDocument = await this.database.updateDocument(
+      conf.appwriteDatabaseId,
+      collectionId,
+      slug,
+      {
+        renterName,
+        renterContact,
+        rentStartDate,
+        rentEndDate,
+        monthlyRent,
+        paymentDueDate,
+        securityPaid,
+        totalAmountPaid,
+        paymentStatus,
+        EntryOperator,
+        wallet
+      }
+    );
+    
+    return updatedDocument; // Return the updated document after success
+
+  } catch (error) {
+    console.error('Error updating rental info:', error);
+    return { success: false, message: error.message }; // Return error information if needed
+  }
+}
+
+      
 
     async deleteBlog(slug){
         try {
@@ -65,11 +91,11 @@ class postOperation{
             return false
         }
     }
-    async getDocuments(queries){
+    async getDocuments(collectionId,queries){
         try {
             return await this.database.listDocuments(
                 conf.appwriteDatabaseId,
-                conf.appwriteCollectionId,
+                collectionId,
                 queries
             )
         } catch (error) {
@@ -78,12 +104,12 @@ class postOperation{
         }
     }
 
-    async getBlog(slug){
+    async getDocument(collectionId,slug){
         
         try {
             return await this.database.getDocument(
-                conf.databaseId,
-                conf.collectionId,
+                conf.appwriteDatabaseId,
+                collectionId,
                 slug
             )
         } catch (error) {
@@ -133,4 +159,4 @@ class postOperation{
     }
 }
 
-export const blogOperations = new postOperation()
+export const documentOperations = new documentOperation()
